@@ -48,14 +48,14 @@ async def check_bot_started_users(user, event):
     check = get_starter_details(user.id)
     if check is None:
         start_date = str(datetime.now().strftime("%B %d, %Y"))
-        notification = f"👤 {_format.mentionuser(user.first_name , user.id)} has started me.\
+        notification = f"👤 {_format.mentionuser(user.first_name , user.id)} bot orqali start bosdi.\
                 \n**ID: **`{user.id}`\
-                \n**Name: **{get_display_name(user)}"
+                \n**Ism: **{get_display_name(user)}"
     else:
         start_date = check.date
-        notification = f"👤 {_format.mentionuser(user.first_name , user.id)} has restarted me.\
+        notification = f"👤 {_format.mentionuser(user.first_name , user.id)} bot orqali start bosdi.\
                 \n**ID: **`{user.id}`\
-                \n**Name: **{get_display_name(user)}"
+                \n**Ism: **{get_display_name(user)}"
     try:
         add_starter_to_db(user.id, get_display_name(user), start_date, user.username)
     except Exception as e:
@@ -103,22 +103,21 @@ async def bot_start(event):
                 my_mention=my_mention,
             )
         else:
-            start_msg = f"Hey! 👤{mention},\
-                        \nI am {my_mention}'s assistant bot.\
-                        \nYou can contact to my master from here.\
-                        \n\nPowered by [Catuserbot](https://t.me/catuserbot)"
+            start_msg = f"Salom! 👤{mention},\
+                        \nMen {my_mention}ning avto javob bergich botiman.\
+                        \nBu yer orqali ho'jayin bilan bog'lana olasiz. Bu yerga yozgan xabarlaringizni unga jo'natib turaman."
         buttons = [
             (
-                Button.url("Repo", "https://github.com/sandy1709/catuserbot"),
+                Button.url("Manba", "https://t.me/uzbekuserbot"),
                 Button.url(
-                    "Deploy",
-                    "https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2FMr-confused%2Fcatpack&template=https%3A%2F%2Fgithub.com%2FMr-confused%2Fcatpack",
+                    "O'rnatib olish",
+                    "https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2Fcherry-soft%2Fuzcatuserbot-heroku&template=https%3A%2F%2Fgithub.com%2Fcherry-soft%2Fuzcatuserbot-heroku",
                 ),
             )
         ]
     else:
-        start_msg = "Hey Master!\
-            \nHow can i help you ?"
+        start_msg = "Salom ho'jayin!\
+            \nSizga qanday yordamim tegishi mumkin ?"
         buttons = None
     try:
         await event.client.send_message(
@@ -180,7 +179,7 @@ async def bot_pms(event):  # sourcery no-metrics
                         user_id, event.text, reply_to=reply_msg, link_preview=False
                     )
             except UserIsBlockedError:
-                return await event.reply("𝗧𝗵𝗶𝘀 𝗯𝗼𝘁 𝘄𝗮𝘀 𝗯𝗹𝗼𝗰𝗸𝗲𝗱 𝗯𝘆 𝘁𝗵𝗲 𝘂𝘀𝗲𝗿. ❌")
+                return await event.reply("Bot foydalanuvchi tomonidan bloklangan ❌")
             except Exception as e:
                 return await event.reply(f"**Error:**\n`{e}`")
             try:
@@ -213,7 +212,7 @@ async def bot_pms_edit(event):  # sourcery no-metrics
         if reply_msg:
             await event.client.send_message(
                 Config.OWNER_ID,
-                f"⬆️ **This message was edited by the user** {_format.mentionuser(get_display_name(chat) , chat.id)} as :",
+                f"⬆️ **Bu xabarni foydalanuvchi tahrirladi** {_format.mentionuser(get_display_name(chat) , chat.id)} as :",
                 reply_to=reply_msg,
             )
             msg = await event.forward_to(Config.OWNER_ID)
@@ -283,7 +282,7 @@ async def handler(event):
                         return
                     await event.client.send_message(
                         Config.OWNER_ID,
-                        f"⬆️ **This message was deleted by the user** {_format.mentionuser(user_name , user_id)}.",
+                        f"⬆️ **Foydalanuvchi bu xabarin o'chirib tashladi** {_format.mentionuser(user_name , user_id)}.",
                         reply_to=reply_msg,
                     )
             except Exception as e:
@@ -297,13 +296,13 @@ async def bot_start(event):
         return await event.reply("Reply to a message to get message info")
     info_msg = await event.client.send_message(
         event.chat_id,
-        "`🔎 Searching for this user in my database ...`",
+        "`🔎 Bu foydalanuvchi bazadan qidirilmoqda ...`",
         reply_to=reply_to,
     )
     users = get_user_id(reply_to)
     if users is None:
         return await info_msg.edit(
-            "**ERROR:** \n`Sorry !, Can't Find this user in my database :(`"
+            "**ERROR:** \n`Uzr, bu foydalanuvchini bazadan topib bo'lmadi :(`"
         )
     for usr in users:
         user_id = int(usr.chat_id)
@@ -311,11 +310,11 @@ async def bot_start(event):
         break
     if user_id is None:
         return await info_msg.edit(
-            "**ERROR:** \n`Sorry !, Can't Find this user in my database :(`"
+            "**ERROR:** \n`Uzr, bu foydalanuvchini bazadan topib bo'lmadi :(`"
         )
     uinfo = f"This message was sent by 👤 {_format.mentionuser(user_name , user_id)}\
-            \n**First Name:** {user_name}\
-            \n**User ID:** `{user_id}`"
+            \n**Ismi:** {user_name}\
+            \n**IDsi:** `{user_id}`"
     await info_msg.edit(uinfo)
 
 
@@ -418,7 +417,7 @@ async def bot_pm_ban_cb(c_q: CallbackQuery):
     else:
         await c_q.answer(f"Banning UserID -> {user_id} ...", alert=False)
         await ban_user_from_bot(user, "Spamming Bot")
-        await c_q.edit(f"✅ **Successfully Banned**  User ID: {user_id}")
+        await c_q.edit(f"✅ **Cheklov muvaffaqiyatli o'rnatildi**  IDsi: {user_id}")
 
 
 def time_now() -> Union[float, int]:
