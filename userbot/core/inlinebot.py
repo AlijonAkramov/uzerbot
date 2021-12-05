@@ -163,7 +163,7 @@ def paginate_help(
             ] + [
                 (
                     Button.inline("⌫", data=f"{prefix}_prev({modulo_page})_plugin"),
-                    Button.inline("⚙️ Main Menu", data="mainmenu"),
+                    Button.inline("⚙️ Bosh memyu", data="mainmenu"),
                     Button.inline("⌦", data=f"{prefix}_next({modulo_page})_plugin"),
                 )
             ]
@@ -181,7 +181,7 @@ def paginate_help(
                     data=f"{prefix}_prev({modulo_page})_command_{category_plugins}_{category_pgno}",
                 ),
                 Button.inline(
-                    "⬅️ Back ",
+                    "⬅️ Ortga ",
                     data=f"back_plugin_{category_plugins}_{category_pgno}",
                 ),
                 Button.inline(
@@ -196,7 +196,7 @@ def paginate_help(
         pairs = pairs + [
             (
                 Button.inline(
-                    "⬅️ Back ",
+                    "⬅️ Ortga ",
                     data=f"back_plugin_{category_plugins}_{category_pgno}",
                 ),
             )
@@ -224,8 +224,8 @@ async def inline_handler(event):  # sourcery no-metrics
         if query.startswith("**Catuserbot"):
             buttons = [
                 (
-                    Button.inline("Stats", data="stats"),
-                    Button.url("Repo", "https://github.com/sandy1709/catuserbot"),
+                    Button.inline("Statistika", data="stats"),
+                    Button.url("Manba", "https://github.com/cherry-soft/uzcatuserbot-heroku"),
                 )
             ]
             ALIVE_PIC = gvarstatus("ALIVE_PIC")
@@ -249,13 +249,13 @@ async def inline_handler(event):  # sourcery no-metrics
             elif I_IMG:
                 result = builder.document(
                     I_IMG,
-                    title="Alive cat",
+                    title="Tirik mushuk",
                     text=query,
                     buttons=buttons,
                 )
             else:
                 result = builder.article(
-                    title="Alive cat",
+                    title="Tirik mushuk",
                     text=query,
                     buttons=buttons,
                 )
@@ -331,10 +331,10 @@ async def inline_handler(event):  # sourcery no-metrics
             timestamp = int(time.time() * 2)
             newtroll = {str(timestamp): {"userid": u, "text": txct}}
 
-            buttons = [Button.inline("show message 🔐", data=f"troll_{timestamp}")]
+            buttons = [Button.inline("Xabarni ko'rish 🔐", data=f"troll_{timestamp}")]
             result = builder.article(
-                title="Troll Message",
-                text=f"Only {sandy} cannot access this message!",
+                title="Troll Xabar",
+                text=f"Bitta {sandy}gina bu xabarni ko'ra olmaydi!",
                 buttons=buttons,
             )
             await event.answer([result] if result else None)
@@ -381,10 +381,10 @@ async def inline_handler(event):  # sourcery no-metrics
             timestamp = int(time.time() * 2)
             newsecret = {str(timestamp): {"userid": u, "text": txct}}
 
-            buttons = [Button.inline("show message 🔐", data=f"secret_{timestamp}")]
+            buttons = [Button.inline("Xabarni ko'rish 🔐", data=f"secret_{timestamp}")]
             result = builder.article(
-                title="secret message",
-                text=f"🔒 A whisper message to {sandy}, Only he/she can open it.",
+                title="Maxfiy xabar",
+                text=f"🔒 {sandy}ga maxfiy xabar, faqat u kishi bu xabarni ko'ra olishlari mumkin",
                 buttons=buttons,
             )
             await event.answer([result] if result else None)
@@ -404,9 +404,9 @@ async def inline_handler(event):  # sourcery no-metrics
             timestamp = int(time.time() * 2)
             newhide = {str(timestamp): {"text": query}}
 
-            buttons = [Button.inline("Read Message ", data=f"hide_{timestamp}")]
+            buttons = [Button.inline("Xabarni o'qish ", data=f"hide_{timestamp}")]
             result = builder.article(
-                title="Hidden Message",
+                title="Yashirin xabar",
                 text=f"✖✖✖",
                 buttons=buttons,
             )
@@ -419,8 +419,8 @@ async def inline_handler(event):  # sourcery no-metrics
         elif string == "help":
             _result = main_menu()
             result = builder.article(
-                title="© CatUserbot Help",
-                description="Help menu for CatUserbot",
+                title="© Uzbek CatUserbot Help",
+                description="Qo'llanma va yordam menyusi",
                 text=_result[0],
                 buttons=_result[1],
                 link_preview=False,
@@ -444,11 +444,11 @@ async def inline_handler(event):  # sourcery no-metrics
                             data=f"ytdl_next_{key_}_1",
                         ),
                         Button.inline(
-                            "📜  List all",
+                            "📜  Barchasini ko'rs.",
                             data=f"ytdl_listall_{key_}_1",
                         ),
                         Button.inline(
-                            "⬇️  Download",
+                            "⬇️  Yuklab olish",
                             data=f'ytdl_download_{outdata[1]["video_id"]}_0',
                         ),
                     ]
@@ -469,7 +469,7 @@ async def inline_handler(event):  # sourcery no-metrics
                     id=str(uuid4()),
                     type="photo",
                     title=link,
-                    description="⬇️ Click to Download",
+                    description="⬇️ Yuklab olish uchun bosing",
                     thumb=photo,
                     content=photo,
                     send_message=types.InputBotInlineMessageMediaAuto(
@@ -478,8 +478,8 @@ async def inline_handler(event):  # sourcery no-metrics
                 )
             else:
                 result = builder.article(
-                    title="Not Found",
-                    text=f"No Results found for `{str_y[1]}`",
+                    title="Topilmadi",
+                    text=f"`{str_y[1]}` uchun hech qanday natija topilmadi",
                     description="INVALID",
                 )
             try:
@@ -488,16 +488,16 @@ async def inline_handler(event):  # sourcery no-metrics
                 await event.answer(
                     [
                         builder.article(
-                            title="Not Found",
-                            text=f"No Results found for `{str_y[1]}`",
+                            title="Topilmadi",
+                            text=f"`{str_y[1]}` uchun hech qanday natija yo'q",
                             description="INVALID",
                         )
                     ]
                 )
         elif string == "age_verification_alert":
             buttons = [
-                Button.inline(text="Yes I'm 18+", data="age_verification_true"),
-                Button.inline(text="No I'm Not", data="age_verification_false"),
+                Button.inline(text="Ha 18 dan kattaman", data="age_verification_true"),
+                Button.inline(text="Yo'q", data="age_verification_false"),
             ]
             markup = event.client.build_reply_markup(buttons)
             photo = types.InputWebDocument(
@@ -507,12 +507,12 @@ async def inline_handler(event):  # sourcery no-metrics
                 attributes=[],
             )
             text, msg_entities = await event.client._parse_message_text(
-                "<b>ARE YOU OLD ENOUGH FOR THIS ?</b>", "html"
+                "<b>Bu uchun yoshingiz yetarlimi ?</b>", "html"
             )
             result = types.InputBotInlineResult(
                 id=str(uuid4()),
                 type="photo",
-                title="Age verification",
+                title="Yoshni tasdiqlash",
                 thumb=photo,
                 content=photo,
                 send_message=types.InputBotInlineMessageMediaAuto(
@@ -522,7 +522,7 @@ async def inline_handler(event):  # sourcery no-metrics
             await event.answer([result] if result else None)
         elif string == "pmpermit":
             buttons = [
-                Button.inline(text="Show Options.", data="show_pmpermit_options"),
+                Button.inline(text="Opsiyalarni ko'rsat.", data="show_pmpermit_options"),
             ]
             PM_PIC = gvarstatus("pmpermit_pic")
             if PM_PIC:
@@ -542,13 +542,13 @@ async def inline_handler(event):  # sourcery no-metrics
             elif CAT_IMG:
                 result = builder.document(
                     CAT_IMG,
-                    title="Alive cat",
+                    title="Tirik mushuk",
                     text=query,
                     buttons=buttons,
                 )
             else:
                 result = builder.article(
-                    title="Alive cat",
+                    title="Tirik mushuk",
                     text=query,
                     buttons=buttons,
                 )
@@ -556,10 +556,10 @@ async def inline_handler(event):  # sourcery no-metrics
     else:
         buttons = [
             (
-                Button.url("Source code", "https://github.com/sandy1709/catuserbot"),
+                Button.url("Manba", "https://github.com/cherry-soft/uzcatuserbot-heroku"),
                 Button.url(
-                    "Deploy",
-                    "https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2FMr-confused%2Fcatpack&template=https%3A%2F%2Fgithub.com%2FMr-confused%2Fcatpack",
+                    "O'rnatib olish",
+                    "https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2Fcherry-soft%2Fuzcatuserbot-heroku&template=https%3A%2F%2Fgithub.com%2Fcherry-soft%2Fuzcatuserbot-heroku",
                 ),
             )
         ]
@@ -568,14 +568,14 @@ async def inline_handler(event):  # sourcery no-metrics
             url=CATLOGO, size=0, mime_type="image/jpeg", attributes=[]
         )
         text, msg_entities = await event.client._parse_message_text(
-            "𝗗𝗲𝗽𝗹𝗼𝘆 𝘆𝗼𝘂𝗿 𝗼𝘄𝗻 𝗖𝗮𝘁𝗨𝘀𝗲𝗿𝗯𝗼𝘁.", "md"
+            "O'z UserBot ingizni o'rnating.", "md"
         )
         result = types.InputBotInlineResult(
             id=str(uuid4()),
             type="photo",
-            title="𝘾𝙖𝙩𝙐𝙨𝙚𝙧𝙗𝙤𝙩",
-            description="Deploy yourself",
-            url="https://github.com/sandy1709/catuserbot",
+            title="UzCatUserBot",
+            description="O'zingiz uchun o'rnatish",
+            url="https://github.com/cherry-soft/uzcatuserbot-heroku",
             thumb=photo,
             content=photo,
             send_message=types.InputBotInlineMessageMediaAuto(
@@ -589,18 +589,18 @@ async def inline_handler(event):  # sourcery no-metrics
 @check_owner
 async def on_plug_in_callback_query_handler(event):
     buttons = [
-        (Button.inline("Open Menu", data="mainmenu"),),
+        (Button.inline("Menyuni ochish", data="mainmenu"),),
     ]
-    await event.edit("Menu Closed", buttons=buttons)
+    await event.edit("Menyu yopiq", buttons=buttons)
 
 
 @catub.tgbot.on(CallbackQuery(data=re.compile(b"check")))
 async def on_plugin_callback_query_handler(event):
-    text = f"𝙿𝚕𝚞𝚐𝚒𝚗𝚜: {len(PLG_INFO)}\
-        \n𝙲𝚘𝚖𝚖𝚊𝚗𝚍𝚜: {len(CMD_INFO)}\
-        \n\n{tr}𝚑𝚎𝚕𝚙 <𝚙𝚕𝚞𝚐𝚒𝚗> : 𝙵𝚘𝚛 𝚜𝚙𝚎𝚌𝚒𝚏𝚒𝚌 𝚙𝚕𝚞𝚐𝚒𝚗 𝚒𝚗𝚏𝚘.\
-        \n{tr}𝚑𝚎𝚕𝚙 -𝚌 <𝚌𝚘𝚖𝚖𝚊𝚗𝚍> : 𝙵𝚘𝚛 𝚊𝚗𝚢 𝚌𝚘𝚖𝚖𝚊𝚗𝚍 𝚒𝚗𝚏𝚘.\
-        \n{tr}𝚜 <𝚚𝚞𝚎𝚛𝚢> : 𝚃𝚘 𝚜𝚎𝚊𝚛𝚌𝚑 𝚊𝚗𝚢 𝚌𝚘𝚖𝚖𝚊𝚗𝚍𝚜.\
+    text = f"𝙿𝚕aginlar: {len(PLG_INFO)}\
+        \nKomandalar: {len(CMD_INFO)}\
+        \n\n{tr}help <𝚙𝚕agin nomi> : O'sha plagin haqida ma'lumot.\
+        \n{tr}help -𝚌 <komanda nomi> : O'sha komanda haqida ma'lumot.\
+        \n{tr}𝚜 <so'rovingiz> : Shu nomdagi komandani qidirish.\
         "
     await event.answer(text, cache_time=0, alert=True)
 
@@ -628,9 +628,9 @@ async def on_plug_in_callback_query_handler(event):
     pgno = int(event.pattern_match.group(3).decode("UTF-8"))
     if mtype == "plugin":
         buttons = paginate_help(pgno, GRP_INFO[category], category)
-        text = f"**Category: **`{category}`\
-            \n**Total plugins :** __{len(GRP_INFO[category])}__\
-            \n**Total Commands:** __{command_in_category(category)}__"
+        text = f"**Toifa: **`{category}`\
+            \n**Jami plaginlar :** __{len(GRP_INFO[category])}__\
+            \n**Jami komandalar:** __{command_in_category(category)}__"
     else:
         category_plugins = str(event.pattern_match.group(4).decode("UTF-8"))
         category_pgno = int(event.pattern_match.group(5).decode("UTF-8"))
@@ -642,9 +642,9 @@ async def on_plug_in_callback_query_handler(event):
             category_plugins=category_plugins,
             category_pgno=category_pgno,
         )
-        text = f"**Plugin: **`{category}`\
-                \n**Category: **__{getkey(category)}__\
-                \n**Total Commands:** __{len(PLG_INFO[category])}__"
+        text = f"**Plagin: **`{category}`\
+                \n**Toifa: **__{getkey(category)}__\
+                \n**Jami komandalar:** __{len(PLG_INFO[category])}__"
     await event.edit(text, buttons=buttons)
 
 
@@ -676,9 +676,9 @@ async def on_plug_in_callback_query_handler(event):
             category_plugins=category_plugins,
             category_pgno=category_pgno,
         )
-        text = f"**Plugin: **`{category}`\
-                \n**Category: **__{getkey(category)}__\
-                \n**Total Commands:** __{len(PLG_INFO[category])}__"
+        text = f"**Plagin: **`{category}`\
+                \n**Toifa: **__{getkey(category)}__\
+                \n**Jami komandalar:** __{len(PLG_INFO[category])}__"
         try:
             return await event.edit(text, buttons=buttons)
         except Exception as e:
@@ -729,14 +729,14 @@ async def on_plug_in_callback_query_handler(event):
     buttons = [
         (
             Button.inline(
-                "⬅️ Back ",
+                "⬅️ Ortga ",
                 data=f"back_command_{category}_{pgno}_{category_plugins}_{category_pgno}",
             ),
-            Button.inline("⚙️ Main Menu", data="mainmenu"),
+            Button.inline("⚙️ Bosh menyu", data="mainmenu"),
         )
     ]
-    text = f"**Command :** `{tr}{cmd}`\
-        \n**Plugin :** `{category}`\
-        \n**Category :** `{category_plugins}`\
-        \n\n**✘ Intro :**\n{CMD_INFO[cmd][0]}"
+    text = f"**Komanda :** `{tr}{cmd}`\
+        \n**Plagin :** `{category}`\
+        \n**Toifa :** `{category_plugins}`\
+        \n\n**✘ Tushuncha :**\n{CMD_INFO[cmd][0]}"
     await event.edit(text, buttons=buttons)
