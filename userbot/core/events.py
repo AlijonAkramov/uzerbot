@@ -62,7 +62,7 @@ class NewMessage(events.NewMessage):
                 is_admin = event.chat.admin_rights
 
             if not is_creator and not is_admin:
-                text = "`I need admin rights to be able to use this command!`"
+                text = "`Bu komandani ishlata olishingiz uchun menga admin huquqlari kerak!`"
 
                 event._client.loop.create_task(edit_or_reply(event, text))
                 return
