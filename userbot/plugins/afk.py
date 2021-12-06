@@ -73,7 +73,7 @@ async def set_not_afk(event):
         if BOTLOG:
             await event.client.send_message(
                 BOTLOG_CHATID,
-                "#AFKFALSE \n`Bandlik rejimini FALSE deb belgilash\n"
+                "#AFKFALSE \n`Bandlik rejimini tugatildi\n"
                 + "Salom, men qaytdim.\nBand bo'lgan vaqtim "
                 + endtime
                 + "`",
