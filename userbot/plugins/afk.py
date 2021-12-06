@@ -63,7 +63,7 @@ async def set_not_afk(event):
     ):
         shite = await event.client.send_message(
             event.chat_id,
-            "`Back alive! No Longer afk.\nWas afk for " + endtime + "`",
+            "`Salom, men qaytdim.\nBand bo'lgan vaqtim " + endtime + "`",
         )
         AFK_.USERAFK_ON = {}
         AFK_.afk_time = None
@@ -73,8 +73,8 @@ async def set_not_afk(event):
         if BOTLOG:
             await event.client.send_message(
                 BOTLOG_CHATID,
-                "#AFKFALSE \n`Set AFK mode to False\n"
-                + "Back alive! No Longer afk.\nWas afk for "
+                "#AFKFALSE \n`Bandlik rejimini FALSE deb belgilash\n"
+                + "Salom, men qaytdim.\nBand bo'lgan vaqtim "
                 + endtime
                 + "`",
             )
@@ -115,23 +115,23 @@ async def on_afk(event):  # sourcery no-metrics
         if AFK_.afk_type == "media":
             if AFK_.reason:
                 message_to_reply = (
-                    f"`I am AFK .\n\nAFK Since {endtime}\nReason : {AFK_.reason}`"
+                    f"`Hozir yozolmayman .\n\n{endtime} dan beri bandman\nSababi : {AFK_.reason}`"
                 )
             else:
-                message_to_reply = f"`I am AFK .\n\nAFK Since {endtime}\nReason : Not Mentioned ( ಠ ʖ̯ ಠ)`"
+                message_to_reply = f"` Hozir yozolmayman.\n\n {endtime} dan beri bandman`"
             if event.chat_id:
                 msg = await event.reply(message_to_reply, file=AFK_.media_afk.media)
         elif AFK_.afk_type == "text":
             if AFK_.msg_link and AFK_.reason:
                 message_to_reply = (
-                    f"**I am AFK .\n\nAFK Since {endtime}\nReason : **{AFK_.reason}"
+                    f"**Hozir yozolmayman .\n\n{endtime} dan beri bandman\nSababi : **{AFK_.reason}"
                 )
             elif AFK_.reason:
                 message_to_reply = (
-                    f"`I am AFK .\n\nAFK Since {endtime}\nReason : {AFK_.reason}`"
+                    f"`Hozir yozolmayman .\n\n{endtime} dan beri bandman\nSababi : {AFK_.reason}`"
                 )
             else:
-                message_to_reply = f"`I am AFK .\n\nAFK Since {endtime}\nReason : Not Mentioned ( ಠ ʖ̯ ಠ)`"
+                message_to_reply = f"`Hozir yozolmayman.\n\n{endtime} dan beri bandman`"
             if event.chat_id:
                 msg = await event.reply(message_to_reply)
         if event.chat_id in AFK_.last_afk_message:
@@ -152,10 +152,10 @@ async def on_afk(event):  # sourcery no-metrics
         if full is not None:
             resalt += f"\n<b>From : </b> 👤{_format.htmlmentionuser(full.first_name , full.id)}"
         if messaget is not None:
-            resalt += f"\n<b>Message type : </b><code>{messaget}</code>"
+            resalt += f"\n<b>Xabar turi : </b><code>{messaget}</code>"
         else:
-            resalt += f"\n<b>Message : </b>{event.message.message}"
-        resalt += f"\n<b>Message link: </b><a href = 'https://t.me/c/{hmm.id}/{event.message.id}'> link</a>"
+            resalt += f"\n<b>Xabar : </b>{event.message.message}"
+        resalt += f"\n<b>Xabar linki: </b><a href = 'https://t.me/c/{hmm.id}/{event.message.id}'> link</a>"
         if not event.is_private:
             await event.client.send_message(
                 Config.PM_LOGGER_GROUP_ID,
@@ -169,20 +169,20 @@ async def on_afk(event):  # sourcery no-metrics
     pattern="afk(?:\s|$)([\s\S]*)",
     command=("afk", plugin_category),
     info={
-        "header": "Enables afk for your account",
-        "description": "When you are in afk if any one tags you then your bot will reply as he is offline.\
-        AFK mean away from keyboard.",
-        "options": "If you want AFK reason with hyperlink use [ ; ] after reason, then paste the media link.",
+        "header": "Bandlik rejimi sizga yozganlarga band ekaningiz haqida xabar beradi",
+        "description": "Guruhda, chatda kimdir sizga reply qilsa yoki yozsa botingiz sizni band ekaningiz haqida xabar berib turadi.\
+        ",
+        "options": "Agar siz bandligingiz sababida giperlink ishlatmoqchi bo'lsangiz sababni ortidan [ ; ] ni qo'shib keting, so'ng mediafaylingiz linkini qo'ying.",
         "usage": [
-            "{tr}afk <reason>",
-            "{tr}afk <reason> ; <link>",
+            "{tr}afk <Sababingiz>",
+            "{tr}afk <Sababingiz> ; <Biror nimani linki>",
         ],
-        "examples": "{tr}afk Let Me Sleep",
-        "note": "Switches off AFK when you type back anything, anywhere. You can use #afk in message to continue in afk without breaking it",
+        "examples": "{tr}afk Ozroq uxlab olay",
+        "note": "Bandlik rejimi qayergadir nimadir yozishingiz bilan avtomat tugatiladi va sizga yozganlarga Telegramga qaytganingiz haqida xabar beriladi. Siz kimgadir yozsangiz ham bandlik rejimida qolishni istasangiz xabaringiz ichida #afk ni qo'shib kiritib keting",
     },
 )
 async def _(event):
-    "To mark yourself as afk i.e. Away from keyboard"
+    "Bandlik rejimiga o'tish (afk)"
     AFK_.USERAFK_ON = {}
     AFK_.afk_time = None
     AFK_.last_afk_message = {}
@@ -208,20 +208,20 @@ async def _(event):
         AFK_.USERAFK_ON = f"on: {AFK_.reason}"
         if AFK_.reason:
             await edit_delete(
-                event, f"`I shall be Going afk! because ~` {AFK_.reason}", 5
+                event, f"`Mayli, men borishim kerak, sababi ~` {AFK_.reason}, ko'rishguncha.", 5
             )
         else:
-            await edit_delete(event, "`I shall be Going afk! `", 5)
+            await edit_delete(event, "`Mayli, men borishim kerak, ko'rishguncha `", 5)
         if BOTLOG:
             if AFK_.reason:
                 await event.client.send_message(
                     BOTLOG_CHATID,
-                    f"#AFKTRUE \nSet AFK mode to True, and Reason is {AFK_.reason}",
+                    f"#AFKTRUE \nBandlik rejimini yoqish, va sababini {AFK_.reason} deb belgilash",
                 )
             else:
                 await event.client.send_message(
                     BOTLOG_CHATID,
-                    "#AFKTRUE \nSet AFK mode to True, and Reason is Not Mentioned",
+                    "#AFKTRUE \nBandlik rejimini yoqish, va sababini ko'rsatmaslik",
                 )
 
 
@@ -229,24 +229,23 @@ async def _(event):
     pattern="mafk(?:\s|$)([\s\S]*)",
     command=("mafk", plugin_category),
     info={
-        "header": "Enables afk for your account",
-        "description": "When you are in afk if any one tags you then your bot will reply as he is offline.\
-         AFK mean away from keyboard. Here it supports media unlike afk command",
-        "options": "If you want AFK reason with hyperlink use [ ; ] after reason, then paste the media link.",
+        "header": "Bandlik rejimini yoqish va sababiga mediafayl ko'rsatish",
+        "description": "Buni yoqsangiz sizga kim qayerdadir yozsa yoki reply qilsa unga sizni band deb xabar beriladi.",
+        "options": "Agar siz bandlik sababida giperlink ishlatmoqchi bo'lsangiz sabab oxirida [ ; ] qo'yib, keyin linkingizni joylang.",
         "usage": [
-            "{tr}mafk <reason> and reply to media",
+            "{tr}mafk <sababi> ni yozib, biror mediafaylga reply qiling",
         ],
-        "examples": "{tr}mafk Let Me Sleep",
-        "note": "Switches off AFK when you type back anything, anywhere. You can use #afk in message to continue in afk without breaking it",
+        "examples": "{tr}mafk ozroq uxlab olay",
+        "note": "Bandlik rejimi qayergadir nimadir yozganingiz zahoti tugatiladi va sizga yozganlarga qaytganingiz haqida xabar beriladi. Bandlik rejimini o'chirmasdan ham yozishish uchun #afk ni yozayotgan xabaringiz ichiga kiritib keting",
     },
 )
 async def _(event):
-    "To mark yourself as afk i.e. Away from keyboard (supports media)"
+    "Bandlik rejimiga o'tish va sababda mediafayl ko'rsatish"
     reply = await event.get_reply_message()
     media_t = media_type(reply)
     if media_t == "Sticker" or not media_t:
         return await edit_or_reply(
-            event, "`You haven't replied to any media to activate media afk`"
+            event, "`Mediafaylli bandlik rejimini yoqish uchun qandaydir media xabarga reply qilishingiz kerak`"
         )
     if not BOTLOG:
         return await edit_or_reply(
@@ -272,7 +271,7 @@ async def _(event):
         AFK_.USERAFK_ON = f"on: {AFK_.reason}"
         if AFK_.reason:
             await edit_delete(
-                event, f"`I shall be Going afk! because ~` {AFK_.reason}", 5
+                event, f"`Mayli, men borishim kerak, sababi ~` {AFK_.reason}, ko'rishguncha", 5
             )
         else:
             await edit_delete(event, "`I shall be Going afk! `", 5)
@@ -280,10 +279,10 @@ async def _(event):
         if AFK_.reason:
             await event.client.send_message(
                 BOTLOG_CHATID,
-                f"#AFKTRUE \nSet AFK mode to True, and Reason is {AFK_.reason}",
+                f"#AFKTRUE \nBandlik rejimini yoqish va sababiga {AFK_.reason} ni ko'rsatish",
             )
         else:
             await event.client.send_message(
                 BOTLOG_CHATID,
-                "#AFKTRUE \nSet AFK mode to True, and Reason is Not Mentioned",
+                "#AFKTRUE \nBanlik rejimini yoqish va sababni ko'rsatmaslik",
             )
