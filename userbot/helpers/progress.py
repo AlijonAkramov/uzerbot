@@ -113,7 +113,7 @@ async def progress(
             return
         del _TASKS[task_id]
         try:
-            await gdrive.edit("`finalizing process ...`")
+            await gdrive.edit("`jarayon yakunlanmoqda ...`")
         except MessageNotModifiedError:
             pass
         except Exception as e:
