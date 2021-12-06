@@ -23,9 +23,9 @@ print("Licensed under the terms of the " + userbot.__license__)
 cmdhr = Config.COMMAND_HAND_LER
 
 try:
-    LOGS.info("Starting Userbot")
+    LOGS.info("UserBot ishga tushirilmoqda")
     catub.loop.run_until_complete(setup_bot())
-    LOGS.info("TG Bot Startup Completed")
+    LOGS.info("UserBotni ishga tushirish tugallandi")
 except Exception as e:
     LOGS.error(f"{e}")
     sys.exit()
@@ -48,10 +48,10 @@ async def startup_process():
     await load_plugins("plugins")
     await load_plugins("assistant")
     print("➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖")
-    print("Yay your userbot is officially working.!!!")
+    print("Sizning botingiz muvaffaqiyatli ishga tushirildi.!!!")
     print(
-        f"Congratulation, now type {cmdhr}alive to see message if catub is live\
-        \nIf you need assistance, head to https://t.me/catuserbot_support"
+        f"Tabriklaymiz, endi Telegramga kirib {cmdhr}alive komandasini berib botni tekshiring\
+        \nYordam kerak bo'lsa, https://t.me/uzbekcatuserbot guruhiga murojaat qiling"
     )
     print("➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖")
     await verifyLoggerGroup()
