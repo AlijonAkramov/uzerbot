@@ -115,23 +115,23 @@ async def on_afk(event):  # sourcery no-metrics
         if AFK_.afk_type == "media":
             if AFK_.reason:
                 message_to_reply = (
-                    f"`Hozir yozolmayman .\n\n{endtime} dan beri bandman\nSababi : {AFK_.reason}`"
+                    f"`Hozir bandroq edim, uzr. O'zim qaytsam javob yozaman Hudo hohlasa .\n\nKetganimga {endtime} bo'ldi\nSababi : {AFK_.reason}`"
                 )
             else:
-                message_to_reply = f"` Hozir yozolmayman.\n\n {endtime} dan beri bandman`"
+                message_to_reply = f"` Hozir bandroq edim uzr. O'zim qaytsam javob yozaman Hudo hohlasa\n\n Ketganimga {endtime} bo'ldi`"
             if event.chat_id:
                 msg = await event.reply(message_to_reply, file=AFK_.media_afk.media)
         elif AFK_.afk_type == "text":
             if AFK_.msg_link and AFK_.reason:
                 message_to_reply = (
-                    f"**Hozir yozolmayman .\n\n{endtime} dan beri bandman\nSababi : **{AFK_.reason}"
+                    f"**Hozir bandroq edim, uzr. O'zim qaytsam javob yozaman Hudo hohlasa .\n\n Ketganimga{endtime} bo'ldi \nSababi : **{AFK_.reason}"
                 )
             elif AFK_.reason:
                 message_to_reply = (
-                    f"`Hozir yozolmayman .\n\n{endtime} dan beri bandman\nSababi : {AFK_.reason}`"
+                    f"`Hozir bandroq edim, uzr. O'zim qaytsam javob yozaman Hudo hohlasa .\n\n Ketganimga {endtime} bo'ldi \nSababi : {AFK_.reason}`"
                 )
             else:
-                message_to_reply = f"`Hozir yozolmayman.\n\n{endtime} dan beri bandman`"
+                message_to_reply = f"`Hozir bandroq edim, uzr. O'zim qaytsam javob yozaman Hudo hohlasa\n\nKetganimga {endtime} bo'ldi`"
             if event.chat_id:
                 msg = await event.reply(message_to_reply)
         if event.chat_id in AFK_.last_afk_message:
@@ -148,7 +148,7 @@ async def on_afk(event):  # sourcery no-metrics
         except Exception as e:
             LOGS.info(str(e))
         messaget = media_type(event)
-        resalt = f"#AFK_TAGS \n<b>Group : </b><code>{hmm.title}</code>"
+        resalt = f"#AFK_TAGS \n<b>Guruh : </b><code>{hmm.title}</code>"
         if full is not None:
             resalt += f"\n<b>From : </b> 👤{_format.htmlmentionuser(full.first_name , full.id)}"
         if messaget is not None:
@@ -170,15 +170,15 @@ async def on_afk(event):  # sourcery no-metrics
     command=("afk", plugin_category),
     info={
         "header": "Bandlik rejimi sizga yozganlarga band ekaningiz haqida xabar beradi",
-        "description": "Guruhda, chatda kimdir sizga reply qilsa yoki yozsa botingiz sizni band ekaningiz haqida xabar berib turadi.\
+        "description": "Guruhda yoki shaxsiy chatda kimdir sizga reply qilsa yoki yozsa botingiz sizni band ekaningiz haqida xabar berib turadi.\
         ",
-        "options": "Agar siz bandligingiz sababida giperlink ishlatmoqchi bo'lsangiz sababni ortidan [ ; ] ni qo'shib keting, so'ng mediafaylingiz linkini qo'ying.",
+        "options": "Agar siz bandligingiz sababida giperlink ishlatmoqchi bo'lsangiz sababni ortidan [ ; ] ni qo'shib, so'ng linkni qo'ying.",
         "usage": [
             "{tr}afk <Sababingiz>",
             "{tr}afk <Sababingiz> ; <Biror nimani linki>",
         ],
         "examples": "{tr}afk Ozroq uxlab olay",
-        "note": "Bandlik rejimi qayergadir nimadir yozishingiz bilan avtomat tugatiladi va sizga yozganlarga Telegramga qaytganingiz haqida xabar beriladi. Siz kimgadir yozsangiz ham bandlik rejimida qolishni istasangiz xabaringiz ichida #afk ni qo'shib kiritib keting",
+        "note": "Bandlik rejimi qayergadir nimadir yozishingiz bilanoq avtomat tugatiladi va sizga yozganlarga Telegramga qaytganingiz haqida xabar beriladi. Siz kimgadir yozsangiz ham bandlik rejimida qolishni istasangiz xabaringiz ichida #afk ni qo'shib kiritib keting",
     },
 )
 async def _(event):
@@ -216,12 +216,12 @@ async def _(event):
             if AFK_.reason:
                 await event.client.send_message(
                     BOTLOG_CHATID,
-                    f"#AFKTRUE \nBandlik rejimini yoqish, va sababini {AFK_.reason} deb belgilash",
+                    f"#AFKTRUE \nBandlik rejimini yoqildi, va sababini {AFK_.reason} deb belgilandi",
                 )
             else:
                 await event.client.send_message(
                     BOTLOG_CHATID,
-                    "#AFKTRUE \nBandlik rejimini yoqish, va sababini ko'rsatmaslik",
+                    "#AFKTRUE \nBandlik rejimini yoqildi, va sababini ko'rsatilmadi",
                 )
 
 
@@ -274,15 +274,15 @@ async def _(event):
                 event, f"`Mayli, men borishim kerak, sababi ~` {AFK_.reason}, ko'rishguncha", 5
             )
         else:
-            await edit_delete(event, "`I shall be Going afk! `", 5)
+            await edit_delete(event, "`Mayli, men borishim kerak, ko'rishguncha! `", 5)
         AFK_.media_afk = await reply.forward_to(BOTLOG_CHATID)
         if AFK_.reason:
             await event.client.send_message(
                 BOTLOG_CHATID,
-                f"#AFKTRUE \nBandlik rejimini yoqish va sababiga {AFK_.reason} ni ko'rsatish",
+                f"#AFKTRUE \nBandlik rejimini yoqildi va sababiga {AFK_.reason} ni ko'rsatdingiz",
             )
         else:
             await event.client.send_message(
                 BOTLOG_CHATID,
-                "#AFKTRUE \nBanlik rejimini yoqish va sababni ko'rsatmaslik",
+                "#AFKTRUE \nBanlik rejimini yoqildi va sababni ko'rsatmadingiz",
             )
